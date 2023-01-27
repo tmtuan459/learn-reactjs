@@ -17,7 +17,7 @@ function TodoList({ todoList, onTodoClickParent }) {
   // const {} = props; //trường hợp nhiều props thì nên để dưới này
 
   const handleTodoClick = (todo, idx) => {
-    if (!onTodoClickParent) return; //đây là func cha truyền xuống, nếu không truyền xuống thì không làm gì cả
+    if (!onTodoClickParent) return; //case cover cho parent ko có event gì cả, đây là func cha truyền xuống, nếu không truyền xuống thì không làm gì cả
 
     onTodoClickParent(todo, idx);
   };
@@ -32,7 +32,7 @@ function TodoList({ todoList, onTodoClickParent }) {
             "todo-item": true, //ví dụ có nhiều class thì rất tiền
             completed: todo.status === "completed",
           })}
-          onClick={() => handleTodoClick(todo, idx)}
+          onClick={() => handleTodoClick(todo, idx)} // truyền index trong mảng
         >
           {todo.title}
         </li> // nếu item phwusc tạp nên tách ra todoItem component

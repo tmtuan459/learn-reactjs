@@ -23,16 +23,23 @@ function TodoFeature(props) {
     },
   ];
 
-  const [todoList, setTodoList] = useState(initTodoListData);
+  const [todoList, setTodoList] = useState(initTodoListData); // chuyển todoList thành 1 state
 
   const handleTodoClick = (todo, idx) => {
     // Làm việc với mảng phải clone ra mảng mới
     // Clone current array to the new one
+    const newTodoList = [...todoList]; // dấu  ... còn gọi là dấu hiệu lây lan: tạo new obj có hầu hết(or tất cả) các thuộc tính của obj hiện có
 
     console.log(todo, idx);
     // toggle state
+    newTodoList[idx] = {
+      // Muốn cập nhật vô vị trí của idx đó
+      ...newTodoList[idx], //Với những giá trị hiện tại của nó, lấy tất cả thuộc tính của obj ra
+      status: newTodoList[idx].status === "new" ? "completed" : "new", //thay đổi status của nó
+    };
 
     // update todo list
+    setTodoList(newTodoList);
   };
 
   return (
