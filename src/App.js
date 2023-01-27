@@ -1,5 +1,8 @@
 import "./App.css";
+import ColorBox from "./Components/ColorBox";
+import Counter from "./Components/Counter";
 import AlbumFeature from "./features/Album";
+import TodoFeature from "./features/Todo/pages";
 import logo from "./logo.svg";
 
 function App() {
@@ -47,9 +50,11 @@ function App() {
           ))}
         </ul>
       </header>
-      {/* <TodoFeature /> */}
+      <TodoFeature />
 
       <AlbumFeature />
+      <Counter />
+      <ColorBox />
     </div>
   );
 }
