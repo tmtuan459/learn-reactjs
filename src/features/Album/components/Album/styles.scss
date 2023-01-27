@@ -1,6 +1,8 @@
-// @mixin fontVSWeight{
-//     font-weight: bold;
-// }
+$font-weight-common: bold; 
+@mixin fontVSWeight{    //Khác với @exclude là kế thừa thuộc tính của thành phần có sẵn, tuy nhiên @mixin & @include cung cấp một giải pháp tốt hơn nhiều, 
+                        //đó là tạo một bộ các thuộc tính, và chèn nó vào bên trong các thành phần muốn sử dụng, quan trọng là @mixin & @include cung cấp đối số có thể tùy chỉnh trong từng thành phần được sử dụng.
+    font-weight: $font-weight-common;
+}
 .album{
     &__thumbnail {
         & > img{
@@ -8,6 +10,6 @@
         }
     }
     &__name {
-        font-weight: bold;
+        @include fontVSWeight;
     }
 }
