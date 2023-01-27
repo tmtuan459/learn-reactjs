@@ -7,7 +7,9 @@ function ColorBox(props) {
     <div>
       {color}
 
-      <button onClick={() => setColor("black")}>Change to black</button>
+      <button style={{ marginLeft: "10px" }} onClick={() => setColor("black")}>
+        Change to black
+      </button>
       <button onClick={() => setColor("white")}>Change to white</button>
     </div>
   );

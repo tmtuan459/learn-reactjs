@@ -6,8 +6,12 @@ function Counter(props) {
   return (
     <div>
       {count}
-
-      <button onClick={() => setCount(count + 1)}>Increase</button>
+      <button
+        style={{ marginLeft: "10px" }}
+        onClick={() => setCount(count + 1)}
+      >
+        Increase
+      </button>
     </div>
   );
 }

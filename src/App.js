@@ -53,8 +53,14 @@ function App() {
       <TodoFeature />
 
       <AlbumFeature />
-      <Counter />
-      <ColorBox />
+
+      <fieldset style={{ margin: "50px 0" }}>
+        <legend>
+          <i style={{ fontWeight: "bold" }}>Counter & Color Box</i>
+        </legend>
+        <Counter />
+        <ColorBox />
+      </fieldset>
     </div>
   );
 }

@@ -24,6 +24,7 @@ function TodoFeature(props) {
   ];
 
   const [todoList, setTodoList] = useState(initTodoListData); // chuyển todoList thành 1 state
+  const [filteredStatus, setFilteredStatus] = useState("all");
 
   const handleTodoClick = (todo, idx) => {
     // Làm việc với mảng phải clone ra mảng mới
@@ -42,11 +43,43 @@ function TodoFeature(props) {
     setTodoList(newTodoList);
   };
 
+  const handleShowAllClick = () => {
+    setFilteredStatus("all");
+  };
+
+  const handleShowCompletedClick = () => {
+    setFilteredStatus("completed");
+  };
+
+  const handleShowNewClick = () => {
+    setFilteredStatus("new");
+  };
+
+  const renderTodoList = todoList.filter(
+    (todo) => filteredStatus === "all" || filteredStatus === todo.status
+  );
+
   return (
     <div>
-      <h3>Todo List</h3>
-      <TodoList todoList={todoList} onTodoClickParent={handleTodoClick} />
-      {/* func onTodoClickParent truyền xuống con*/}
+      <fieldset>
+        <legend>
+          <h3>Todo List</h3>{" "}
+        </legend>
+
+        <TodoList
+          todoList={renderTodoList}
+          onTodoClickParent={handleTodoClick}
+        />
+        {/* func onTodoClickParent truyền xuống con*/}
+
+        <div>
+          <button onClick={handleShowAllClick}>Show All Item</button>
+          <button onClick={handleShowCompletedClick}>
+            Show Completed Item
+          </button>
+          <button onClick={handleShowNewClick}>Show New Item</button>
+        </div>
+      </fieldset>
     </div>
   );
 }
