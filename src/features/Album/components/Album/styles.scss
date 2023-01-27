@@ -1,0 +1,13 @@
+// @mixin fontVSWeight{
+//     font-weight: bold;
+// }
+.album{
+    &__thumbnail {
+        & > img{
+            width:190px;
+        }
+    }
+    &__name {
+        font-weight: bold;
+    }
+}
