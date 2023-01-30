@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import "./styles.scss";
+
 TodoList.propTypes = {
   todoList: PropTypes.array,
   onTodoClick: PropTypes.func,

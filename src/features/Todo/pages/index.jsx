@@ -31,7 +31,7 @@ function TodoFeature(props) {
     // Clone current array to the new one
     const newTodoList = [...todoList]; // dấu  ... còn gọi là dấu hiệu lây lan: tạo new obj có hầu hết(or tất cả) các thuộc tính của obj hiện có
 
-    console.log(todo, idx);
+    // console.log(todo, idx);
     // toggle state
     newTodoList[idx] = {
       // Muốn cập nhật vô vị trí của idx đó

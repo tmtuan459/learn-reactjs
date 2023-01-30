@@ -1,0 +1,24 @@
+$font-weight-common: bold; //xài biến
+$w-100: 100px; // ko thể bắt đầu bằng ssos
+$width-image: $w-100 + 90px;
+
+@mixin fontVSWeight{    //Khác với @exclude là kế thừa thuộc tính của thành phần có sẵn, tuy nhiên @mixin & @include cung cấp một giải pháp tốt hơn nhiều, 
+    //đó là tạo một bộ các thuộc tính, và chèn nó vào bên trong các thành phần muốn sử dụng, quan trọng là @mixin & @include cung cấp đối số có thể tùy chỉnh trong từng thành phần được sử dụng.
+font-weight: $font-weight-common;
+}
+@mixin borderRadiusVS($percent){
+border-radius: $percent;
+}
+
+.category{
+    &__thumbnail {
+        & > img{
+            width:190px;
+            @include borderRadiusVS(5%);
+        }
+    }
+    &__name { //css theo tên miền phía trước ví dụ ở đây class name là : album__name
+        @include fontVSWeight;
+    }
+
+}

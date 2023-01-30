@@ -2,6 +2,7 @@ import "./App.css";
 import ColorBox from "./Components/ColorBox";
 import Counter from "./Components/Counter";
 import AlbumFeature from "./features/Album";
+import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
 import logo from "./logo.svg";
 
@@ -61,6 +62,8 @@ function App() {
         <Counter />
         <ColorBox />
       </fieldset>
+
+      <ListCategoryFeature />
     </div>
   );
 }
