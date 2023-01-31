@@ -1,5 +1,6 @@
 import { useState } from "react";
-import ListCategory from "../components/CategoryList"
+import ListCategory from "../components/CategoryList";
+import "./styles.scss";
 
 function ListCategoryFeature() {
   const listCategoryInit = [
@@ -65,17 +66,15 @@ function ListCategoryFeature() {
   return (
     <fieldset>
       <legend>ListCategory</legend>
-
-      <ListCategory
-        listcatetory={renderCategoryList}
-        CategoryOnClickTrigger={CategoryOnClick}
-      />
-
-      <div>
+      <div className="button-group">
         <button onClick={ShowAllItem}>Show All Item</button>
         <button onClick={ShowActiveItem}>Show Active Item</button>
         <button onClick={ShowDeactiveItem}>Show Deactive Item</button>
       </div>
+      <ListCategory
+        listcatetory={renderCategoryList}
+        CategoryOnClickTrigger={CategoryOnClick}
+      />
     </fieldset>
   );
 }

@@ -28,11 +28,15 @@ function ListCategory({ listcatetory, CategoryOnClickTrigger }) {
           className={classNames({
             active: category.status === true,
           })}
-          onClick={() => {
-            CategoryOnClick(idx);
-          }}
+          // onClick={() => {
+          //   CategoryOnClick(idx);
+          // }}
         >
-          <CategoryItem props={category} />
+          <CategoryItem
+            props={category}
+            idxItem={idx}
+            triggerCategoryItemOnclick={CategoryOnClick}
+          />
         </li>
       ))}
     </ul>
