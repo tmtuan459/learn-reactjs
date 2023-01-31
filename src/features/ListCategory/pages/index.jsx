@@ -34,9 +34,12 @@ function ListCategoryFeature() {
     },
   ];
 
+  //const a = demo(); //đây gọi là initial state chỉ render lần đầu, render những lần sau không đc re-render
+
   const [categoryList, setCategoryList] = useState(listCategoryInit);
   const [FilterStatus, setFilterStatus] = useState("all");
 
+ 
   const CategoryOnClick = (idx) => {
     const newCategoryList = [...categoryList];
 

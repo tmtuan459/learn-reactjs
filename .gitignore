@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# step by step deloy git
+git add .
+git commit -m "message"
+git push -u origin master
