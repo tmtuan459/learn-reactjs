@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.scss";
 import ColorBox from "./Components/ColorBox";
 import Counter from "./Components/Counter";
+import Pagination from "./Components/Pagination";
+import PostList from "./Components/PostList";
 import AlbumFeature from "./features/Album";
 import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
 import logo from "./logo.svg";
 import ColorBoxHook from "./study/ColorBox";
 import TodoList from "./study/TodoList";
+import queryString from "query-string";
+import PostFiltersForm from "./Components/PostFiltersForm";
 
 function App() {
   const name = "Tuan";
@@ -33,12 +37,63 @@ function App() {
     },
   ]);
 
+  // list API
+  const [postList, setPostList] = useState([]);
+  const [pagination, setPagination] = useState({
+    // tạo giống như api
+    _page: 1,
+    _limit: 10,
+    _totalRows: 10,
+  });
+  const [filters, setFilters] = useState({
+    // custom filter cho nhiều func: pagination, search, ...
+    _limit: 10,
+    _page: 1,
+  });
+  useEffect(() => {
+    async function fetchPostList() {
+      try {
+        const paramsString = queryString.stringify(filters);
+        const requestUrl = `https://js-post-api.herokuapp.com/api/posts?${paramsString}`;
+        const respone = await fetch(requestUrl);
+        const responeJSON = await respone.json(); // convert data to object
+
+        console.log(responeJSON);
+        const { data, pagination } = responeJSON; // convert data to array
+        setPostList(data);
+        setPagination(pagination);
+      } catch (error) {
+        console.log("Failed to fetch post list", error.message);
+      }
+    }
+    fetchPostList();
+  }, [filters]);
+  // 1.mảng empty: chạy đúng 1 lần, 2.nếu không dependencies có thì đồng nghĩa lúc nào cũng chạy, 3. có điều kiện thì lần 2 sẽ xét dependencies thay đổi, sẽ chạy if t
+
+  // useEffect(() => { ví dụ về multi use Effect
+  //   console.log("TODO list effect");
+  // });
+
   const [todoListTemp] = useState([...todoList]);
 
   const showHook = (props) => {
     if (props === true) setIsShowHook(true);
     else setIsShowHook(false);
   };
+
+  function handlePageChange(newPage) {
+    setFilters({
+      ...filters, //lấy hết các phần tử trong đó
+      _page: newPage, //đè lên phần tử
+    });
+  }
+  function handleFilterChange(newFilters) {
+    setFilters({
+      ...filters, //lấy lại các phần tử
+      _page: 1, //reset page về trang 1 để, tranh filter list ko hiện thị đúng
+      title_like: newFilters.searchTerm, //UI
+    });
+  }
 
   function handleTodoClick(todo) {
     console.log(todo);
@@ -145,6 +200,13 @@ function App() {
             />
           </div>
         )}
+      </div>
+
+      {/* List API */}
+      <div>
+        <PostFiltersForm onSubmit={handleFilterChange} />
+        <PostList postList={postList} pagination={pagination} />
+        <Pagination pagination={pagination} onPageChange={handlePageChange} />
       </div>
     </div>
   );
