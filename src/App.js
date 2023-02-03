@@ -13,6 +13,8 @@ import TodoList from "./study/TodoList";
 import queryString from "query-string";
 import PostFiltersForm from "./Components/PostFiltersForm";
 import Clock from "./Components/Clock";
+import BetterClock from "./Components/BetterClock";
+import MagicBox from "./Components/MagicBox";
 
 function App() {
   const name = "Tuan";
@@ -59,7 +61,6 @@ function App() {
         const respone = await fetch(requestUrl);
         const responeJSON = await respone.json(); // convert data to object
 
-        console.log(responeJSON);
         const { data, pagination } = responeJSON; // convert data to array
         setPostList(data);
         setPagination(pagination);
@@ -97,7 +98,7 @@ function App() {
   }
 
   function handleTodoClick(todo) {
-    console.log(todo);
+    // console.log(todo);
     const index = todoList.findIndex((x) => x.id === todo.id);
     if (index < 0) return; // find ko thấy thì nó sẽ trả về -1 nên có thể check thế này để cover case null
 
@@ -116,6 +117,8 @@ function App() {
   function handleSubmitForm(newTodolist) {
     setTodoList(newTodolist);
   }
+
+  const [showClock, setShowClock] = useState(true);
 
   return (
     <div className="App">
@@ -152,8 +155,13 @@ function App() {
             </li>
           ))}
         </ul>
-
-        <Clock />
+        <>
+          <BetterClock />
+          {showClock && <Clock />}
+          <button onClick={() => setShowClock(!showClock)}>
+            {showClock ? "Hide Clock" : "Show Clock"}
+          </button>
+        </>
       </header>
       <TodoFeature />
       <AlbumFeature />
@@ -165,6 +173,8 @@ function App() {
         <ColorBox />
       </fieldset>
       <ListCategoryFeature />
+
+      {/* Show Color Box */}
       <div>
         <button
           onClick={() => {
@@ -188,6 +198,7 @@ function App() {
           </div>
         )}
       </div>
+      {/* TodoList */}
       <div>
         {!isShowHook && (
           <div>
@@ -200,13 +211,19 @@ function App() {
           </div>
         )}
       </div>
+
+      {/* MacgicBox */}
+
+      <div>
+        <MagicBox />
+      </div>
+
       {/* List API */}
       <div>
         <PostFiltersForm onSubmit={handleFilterChange} />
         <PostList postList={postList} pagination={pagination} />
         <Pagination pagination={pagination} onPageChange={handlePageChange} />
       </div>
-      div
     </div>
   );
 }

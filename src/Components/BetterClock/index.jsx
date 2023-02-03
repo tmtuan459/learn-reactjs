@@ -1,18 +1,20 @@
 import React from "react";
 import useClock from "../../hooks/useClock";
 
-Clock.propTypes = {};
+BetterClock.propTypes = {};
 
-function Clock() {
+function BetterClock() {
   const { timeString } = useClock();
 
   return (
     <p
       style={{
         fontSize: "42px",
-        border: "1px solid",
-        borderRadius: "10px",
+        width: "300px",
+        border: "3px solid",
+        borderRadius: "30px",
         padding: "10px",
+        textAlign: "center",
       }}
     >
       Time: {timeString}
@@ -20,4 +22,4 @@ function Clock() {
   );
 }
 
-export default Clock;
+export default BetterClock;
