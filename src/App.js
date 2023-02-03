@@ -12,6 +12,7 @@ import ColorBoxHook from "./study/ColorBox";
 import TodoList from "./study/TodoList";
 import queryString from "query-string";
 import PostFiltersForm from "./Components/PostFiltersForm";
+import Clock from "./Components/Clock";
 
 function App() {
   const name = "Tuan";
@@ -53,7 +54,7 @@ function App() {
   useEffect(() => {
     async function fetchPostList() {
       try {
-        const paramsString = queryString.stringify(filters);
+        const paramsString = queryString.stringify(filters); // chuyển object sang string
         const requestUrl = `https://js-post-api.herokuapp.com/api/posts?${paramsString}`;
         const respone = await fetch(requestUrl);
         const responeJSON = await respone.json(); // convert data to object
@@ -151,11 +152,11 @@ function App() {
             </li>
           ))}
         </ul>
+
+        <Clock />
       </header>
       <TodoFeature />
-
       <AlbumFeature />
-
       <fieldset style={{ margin: "50px 0" }}>
         <legend>
           <i style={{ fontWeight: "bold" }}>Counter & Color Box</i>
@@ -163,7 +164,6 @@ function App() {
         <Counter />
         <ColorBox />
       </fieldset>
-
       <ListCategoryFeature />
       <div>
         <button
@@ -188,7 +188,6 @@ function App() {
           </div>
         )}
       </div>
-
       <div>
         {!isShowHook && (
           <div>
@@ -201,13 +200,13 @@ function App() {
           </div>
         )}
       </div>
-
       {/* List API */}
       <div>
         <PostFiltersForm onSubmit={handleFilterChange} />
         <PostList postList={postList} pagination={pagination} />
         <Pagination pagination={pagination} onPageChange={handlePageChange} />
       </div>
+      div
     </div>
   );
 }

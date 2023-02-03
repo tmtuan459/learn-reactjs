@@ -80,3 +80,20 @@ src
 | ------|-- pages (pages of feature Todo)
 | ------|-- index.jsx (entry point of feature Todo)
 | -- App.js
+
+
+<!-- Install  -->
+
+ - npm install sass : Sử dụng sass
+      + nếu gặp lỗi: gỡ và cài lại ver 4  npm uninstall node-sass
+                                          npm install node-sass@^4
+
+ - npm install query-string: sử dụng để chuyển object sang string
+      + ex: const paramsString = queryString.stringify(filters);(ex:_limit=10&_page=1)                                         
+ - npm install classnames: Một tiện ích JavaScript đơn giản để nối các tên lớp với nhau một cách có điều kiện.
+      + ex: import classNames from "classnames";     
+            className={classNames({
+                  // install npm npm i --save classnames // dùng cái này thì rất gọn
+                  "todo-item": true, // ví dụ có nhiều class thì rất tiền
+                  completedClassStyle: todo.status === "completed", //completedClassStyle là class sẽ đc add vào nếu điều kiện bên phải true
+            })}
