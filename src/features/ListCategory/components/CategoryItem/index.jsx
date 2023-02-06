@@ -29,10 +29,9 @@ export default function CategoryItem({
       </div>
       <p className="category__name">{props.title}</p>
       <button
-        onClick={() => {
-          CategoryOnClick(idxItem);
-        }}
+        onClick={() => {CategoryOnClick(idxItem);}}
       >
+        
         Active
       </button>
     </div>

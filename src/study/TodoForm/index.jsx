@@ -34,7 +34,7 @@ function TodoForm(props) {
     <fieldset>
       <p>Form</p>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleValueChange} />
+        <input type="text" value={value} onChange={handleValueChange} placeholder="Please input the data " />
       </form>
     </fieldset>
   );

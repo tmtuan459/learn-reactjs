@@ -32,6 +32,7 @@ function ColorBox() {
       onClick={handleBoxClick}
     >
       COLOR BOX RANDOM
+
     </div>
   );
 }
