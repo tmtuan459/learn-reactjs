@@ -44,6 +44,7 @@ function PostFiltersForm(props) {
           disableClearable
           options={postList.map((option) => option.title)}
           value={searchTerm}
+          defaultValue=""
           renderInput={(params) => (
             <TextField
               {...params}
@@ -52,9 +53,12 @@ function PostFiltersForm(props) {
                 ...params.InputProps,
                 type: "search",
               }}
-              onChange={handleChangeTermChange}
+              onChange={() => handleChangeTermChange}
             />
           )}
+          isOptionEqualToValue={(option, value) =>
+            value === undefined || value === "" || option.id === value.id
+          }
         />
       </Stack>
     </form>
