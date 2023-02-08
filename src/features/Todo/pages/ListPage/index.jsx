@@ -4,7 +4,7 @@ import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import DataTable from "../../../../Components/DataGrid";
-import FloatingActionButtonZoom from "../../../../Components/TabPanel";
+
 import TodoList from "../../components/TodoList";
 
 ListPage.propTypes = {};
@@ -153,8 +153,6 @@ function ListPage(props) {
           </button>
           <button onClick={handleShowNewClick}>Show New Item</button> */}
         </div>
-
-        <FloatingActionButtonZoom />
 
         <DataTable />
       </fieldset>
