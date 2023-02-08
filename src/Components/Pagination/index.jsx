@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Button, ButtonGroup } from "@mui/material";
 
 Pagination.propTypes = {
   pagination: PropTypes.object.isRequired,
@@ -21,15 +22,21 @@ function Pagination(props) {
   }
   return (
     <div>
-      <button disabled={_page <= 1} onClick={() => handlePageChange(_page - 1)}>
-        Prev
-      </button>
-      <button
-        disabled={_page >= totalPages}
-        onClick={() => handlePageChange(_page + 1)}
-      >
-        next
-      </button>
+      <ButtonGroup variant="text" aria-label="text button group">
+        <Button
+          disabled={_page <= 1}
+          onClick={() => handlePageChange(_page - 1)}
+        >
+          {" "}
+          Prev
+        </Button>
+        <Button
+          disabled={_page >= totalPages}
+          onClick={() => handlePageChange(_page + 1)}
+        >
+          next
+        </Button>
+      </ButtonGroup>
     </div>
   );
 }

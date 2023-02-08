@@ -1,5 +1,8 @@
 import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Autocomplete from "@mui/material/Autocomplete";
 
 PostFiltersForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -9,7 +12,7 @@ PostFiltersForm.defaultProps = {
 };
 // Cách áp dụng debounce: gõ xong mới submit lên
 function PostFiltersForm(props) {
-  const { onSubmit } = props;
+  const { onSubmit, postList } = props;
   const [searchTerm, setSearchTerm] = useState("");
   const typingTimeoutRef = useRef(null); //tạo ra 1 object và không thay đổi giữa các lần render
 
@@ -35,14 +38,25 @@ function PostFiltersForm(props) {
 
   return (
     <form onSubmit={onSubmit}>
-      <hr />
-      <label htmlFor="">Search</label>{" "}
-      <input
-        type="text"
-        value={searchTerm}
-        onChange={handleChangeTermChange}
-        placeholder="Please input the data"
-      />
+      <Stack>
+        <Autocomplete
+          // id="free-solo-2-demo"
+          disableClearable
+          options={postList.map((option) => option.title)}
+          value={searchTerm}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Search input"
+              InputProps={{
+                ...params.InputProps,
+                type: "search",
+              }}
+              onChange={handleChangeTermChange}
+            />
+          )}
+        />
+      </Stack>
     </form>
   );
 }

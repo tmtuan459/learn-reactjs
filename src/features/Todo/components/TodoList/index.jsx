@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 import "./styles.scss";
+import { Tooltip } from "@mui/material";
 
 TodoList.propTypes = {
   todoList: PropTypes.array,
@@ -35,7 +36,9 @@ function TodoList({ todoList, onTodoClickParent }) {
           })}
           onClick={() => handleTodoClick(todo, idx)} // truyền index trong mảng
         >
-          {todo.title}
+          <Tooltip title="On click to mark finished item">
+            <div>{todo.title}</div>
+          </Tooltip>
         </li> // nếu item phwusc tạp nên tách ra todoItem component
       ))}
     </ul>

@@ -6,10 +6,13 @@ import BetterClock from "./Components/BetterClock";
 import Clock from "./Components/Clock";
 import ColorBox from "./Components/ColorBox";
 import Counter from "./Components/Counter";
+import Header from "./Components/Header";
 import MagicBox from "./Components/MagicBox";
+import NotFound from "./Components/NotFound";
 import Pagination from "./Components/Pagination";
 import PostFiltersForm from "./Components/PostFiltersForm";
 import PostList from "./Components/PostList";
+import ProgressBar from "./Components/ProgressBarScroll";
 import AlbumFeature from "./features/Album";
 import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
@@ -126,6 +129,8 @@ function App() {
 
   return (
     <div className="App">
+      <ProgressBar />
+      <Header />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -167,18 +172,9 @@ function App() {
         </>
       </header>
 
-      {/* Switch: tại 1 thời điểm chỉ render 1 component, nhứ vs bên dưới chỉ render ra đúng component todos */}
-      {/* Redirect sử dụng trong Switch */}
-      <Switch>
-        <Redirect from="/home" to="/"></Redirect>
-        {/* có thể truyền cả param:  */}
-        <Redirect from="/post-list/:postId" to="/posts/:postId"></Redirect>
-      </Switch>
-
       {/* Menu */}
       {/* Link thì tương tự NavLink nhưng không có class active */}
       {/* NavLink dành cho dạng như menu active, khi click thì sẽ set class= acitve vào item */}
-
       <ul className="menu-item">
         <li>
           <NavLink to="/todos"> Todos </NavLink>
@@ -200,71 +196,90 @@ function App() {
         </li>
       </ul>
 
-      {/*mặc đinh exact = false, nếu có set exact thì nhập /todos/121231 vẫn load được component dưới*/}
-      <Route path="/todos" component={TodoFeature} />
+      {/* Switch: tại 1 thời điểm chỉ render 1 component, nhứ vs bên dưới chỉ render ra đúng component todos */}
+      {/* Redirect sử dụng trong Switch */}
+      <Switch>
+        <Redirect from="/" to="/todos" exact />
+        <Redirect from="/home" to="/"></Redirect>
+        {/* có thể truyền cả param:  */}
+        <Redirect from="/post-list/:postId" to="/posts/:postId"></Redirect>
 
-      {/* Ở đây nếu sử dụng exact thì sẽ phải nhập đúng path mới render đc component, nên dùng exact cho component con */}
-      <Route path="/counter-color" exact>
-        <fieldset style={{ margin: "50px 0" }}>
-          <legend>
-            <i style={{ fontWeight: "bold" }}> Counter & Color Box </i>
-          </legend>
-          <Counter />
-          <ColorBox />
-        </fieldset>
-        <CounterPrev />
-      </Route>
+        {/* =========================Route============================ */}
+        {/*mặc đinh exact = false, nếu có set exact thì nhập /todos/121231 vẫn load được component dưới*/}
+        <Route path="/todos" component={TodoFeature} />
 
-      <Route path="/albums" component={AlbumFeature} />
+        {/* Ở đây nếu sử dụng exact thì sẽ phải nhập đúng path mới render đc component, nên dùng exact cho component con */}
+        <Route path="/counter-color" exact>
+          <fieldset style={{ margin: "50px 0" }}>
+            <legend>
+              <i style={{ fontWeight: "bold" }}> Counter & Color Box </i>
+            </legend>
+            <Counter />
+            <ColorBox />
+          </fieldset>
+          <CounterPrev />
+        </Route>
 
-      <Route path="/list-category" component={ListCategoryFeature} />
+        <Route path="/albums" component={AlbumFeature} />
 
-      <Route path="/color-todoList">
-        <div>
-          <button
-            onClick={() => {
-              showHook(true);
-            }}
-          >
-            Show Color Box
-          </button>
-          <button
-            onClick={() => {
-              showHook(false);
-            }}
-          >
-            Show Todo List
-          </button>
-        </div>
-        <div>
-          {isShowHook && (
-            <div>
-              <ColorBoxHook />
-              <MagicBox />
-            </div>
-          )}
-        </div>
-        <div>
-          {!isShowHook && (
-            <div>
-              <TodoList
-                todos={todoList}
-                onTodoClick={handleTodoClick}
-                resetOnClick={handleResetList}
-                submitOnClick={handleSubmitForm}
-              />
-            </div>
-          )}
-        </div>
-      </Route>
+        <Route path="/list-category" component={ListCategoryFeature} />
 
-      <Route path="/post-list-api">
-        <div>
-          <PostFiltersForm onSubmit={handleFilterChange} />
-          <PostList postList={postList} pagination={pagination} />
-          <Pagination pagination={pagination} onPageChange={handlePageChange} />
-        </div>
-      </Route>
+        <Route path="/color-todoList">
+          <div>
+            <button
+              onClick={() => {
+                showHook(true);
+              }}
+            >
+              Show Color Box
+            </button>
+            <button
+              onClick={() => {
+                showHook(false);
+              }}
+            >
+              Show Todo List
+            </button>
+          </div>
+          <div>
+            {isShowHook && (
+              <div>
+                <ColorBoxHook />
+                <MagicBox />
+              </div>
+            )}
+          </div>
+          <div>
+            {!isShowHook && (
+              <div>
+                <TodoList
+                  todos={todoList}
+                  onTodoClick={handleTodoClick}
+                  resetOnClick={handleResetList}
+                  submitOnClick={handleSubmitForm}
+                />
+              </div>
+            )}
+          </div>
+        </Route>
+
+        <Route path="/post-list-api">
+          <div>
+            <PostFiltersForm
+              postList={postList}
+              onSubmit={handleFilterChange}
+            />
+            <PostList postList={postList} pagination={pagination} />
+            <Pagination
+              pagination={pagination}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        </Route>
+
+        {/* ở đây có nghĩa khi không có ông nào match với thì sẽ trả về thằng dưới cùng này theo cơ chế của switch */}
+        <Route component={NotFound} />
+      </Switch>
 
       <footer
         style={{ marginBottom: "50px", backgroundColor: "#282c34" }}
