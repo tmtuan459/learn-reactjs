@@ -53,7 +53,7 @@ function PostFiltersForm(props) {
                 ...params.InputProps,
                 type: "search",
               }}
-              onChange={() => handleChangeTermChange}
+              onChange={handleChangeTermChange}
             />
           )}
           isOptionEqualToValue={(option, value) =>

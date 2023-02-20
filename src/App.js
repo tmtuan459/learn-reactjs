@@ -1,6 +1,8 @@
+import { Grid } from "@mui/material";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
+import productApi from "./api/productApi";
 import "./App.scss";
 import BetterClock from "./Components/BetterClock";
 import Clock from "./Components/Clock";
@@ -12,7 +14,6 @@ import NotFound from "./Components/NotFound";
 import Pagination from "./Components/Pagination";
 import PostFiltersForm from "./Components/PostFiltersForm";
 import PostList from "./Components/PostList";
-import ProgressBar from "./Components/ProgressBarScroll";
 import AlbumFeature from "./features/Album";
 import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
@@ -81,6 +82,16 @@ function App() {
   //   console.log("TODO list effect");
   // });
 
+  // Start API
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const productList = await productApi.getAll();
+      // console.log(productList);
+    };
+    fetchProducts();
+  }, []);
+  // End API
+
   const [todoListTemp] = useState([...todoList]);
 
   const showHook = (props) => {
@@ -129,8 +140,8 @@ function App() {
 
   return (
     <div className="App">
-      <ProgressBar />
-      <Header />
+      <Header className="App-nav-bar" />
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -225,7 +236,7 @@ function App() {
         <Route path="/list-category" component={ListCategoryFeature} />
 
         <Route path="/color-todoList">
-          <div>
+          <div style={{ marginBottom: "30px" }}>
             <button
               onClick={() => {
                 showHook(true);
@@ -243,10 +254,15 @@ function App() {
           </div>
           <div>
             {isShowHook && (
-              <div>
-                <ColorBoxHook />
-                <MagicBox />
-              </div>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <ColorBoxHook />
+                </Grid>
+
+                <Grid item xs={6}>
+                  <MagicBox />
+                </Grid>
+              </Grid>
             )}
           </div>
           <div>

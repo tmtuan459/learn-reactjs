@@ -1,6 +1,7 @@
 import "./ColorBox.scss";
 
 import React, { useState } from "react";
+import { Tooltip } from "@mui/material";
 
 ColorBox.propTypes = {};
 
@@ -26,14 +27,15 @@ function ColorBox() {
   }
 
   return (
-    <div
-      className="color-box"
-      style={{ backgroundColor: color }}
-      onClick={handleBoxClick}
-    >
-      COLOR BOX RANDOM
-
-    </div>
+    <Tooltip title="Click to change the color" arrow>
+      <div
+        className="color-box"
+        style={{ backgroundColor: color }}
+        onClick={handleBoxClick}
+      >
+        COLOR BOX RANDOM
+      </div>
+    </Tooltip>
   );
 }
 

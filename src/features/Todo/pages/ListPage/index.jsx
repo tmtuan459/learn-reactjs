@@ -4,6 +4,7 @@ import React, { useEffect, useMemo } from "react";
 import { useState } from "react";
 import { useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import DataTable from "../../../../Components/DataGrid";
+import TodoForm from "../../components/TodoForm";
 
 import TodoList from "../../components/TodoList";
 
@@ -94,6 +95,10 @@ function ListPage(props) {
     });
   };
 
+  const handleTodoFormSubmit = (values) => {
+    console.log("FormSubmit", values);
+  };
+
   const handleChange = (e, alignment) => {
     const param = e.target.value;
 
@@ -123,6 +128,8 @@ function ListPage(props) {
 
   return (
     <div>
+      <TodoForm onSubmit={handleTodoFormSubmit} />
+
       <fieldset>
         <legend>
           <h3>Todo List</h3>{" "}
