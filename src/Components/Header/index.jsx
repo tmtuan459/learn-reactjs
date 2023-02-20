@@ -238,11 +238,9 @@ function Header() {
               </Menu>
             </Box>
           </Toolbar>
-          <hr />
+          <ProgressBar />
         </Container>
       </AppBar>
-
-      <ProgressBar />
     </>
   );
 }
