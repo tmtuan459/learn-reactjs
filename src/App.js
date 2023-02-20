@@ -2,7 +2,7 @@ import { Grid } from "@mui/material";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
-import productApi from "./api/productApi";
+// import productApi from "./api/productApi";
 import "./App.scss";
 import BetterClock from "./Components/BetterClock";
 import Clock from "./Components/Clock";
@@ -85,7 +85,7 @@ function App() {
   // Start API
   useEffect(() => {
     const fetchProducts = async () => {
-      const productList = await productApi.getAll();
+      // const productList = await productApi.getAll();
       // console.log(productList);
     };
     fetchProducts();
