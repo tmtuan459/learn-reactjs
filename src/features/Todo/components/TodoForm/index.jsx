@@ -1,7 +1,8 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import PropTypes from "prop-types";
 import React from "react";
 import { useForm } from "react-hook-form";
-
+import * as yup from "yup";
 import InputField from "../../../../Components/form-controls/InputField";
 
 TodoForm.propTypes = {
@@ -9,14 +10,26 @@ TodoForm.propTypes = {
 };
 
 function TodoForm(props) {
+  // validation - coppy
+  const schema = yup.object().shape({
+    title: yup
+      .string()
+      .required("Please enter title")
+      .min(5, "Title is too short"),
+  });
+
   const form = useForm({
     defaultValues: {
       title: "", // cần liệt kê ở đây nếu khoonh sẽ gặp tình trạng không biết nó là gì lõi: UnControl
     },
+    resolver: yupResolver(schema),
   });
 
   const handleSubmitAction = (values) => {
-    console.log("TodoForm", values);
+    const { onSubmit } = props;
+    if (onSubmit) {
+      onSubmit(values);
+    }
   };
 
   return (

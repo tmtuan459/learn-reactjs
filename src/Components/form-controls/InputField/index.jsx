@@ -9,10 +9,14 @@ InputField.propTypes = {
 
   label: PropTypes.string,
   disabled: PropTypes.bool,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
 };
 
 function InputField(props) {
   const { form, name, label, disabled } = props;
+  const { errors, formState } = form;
+  const hasError = formState.isSubmit[name] && errors[name];
 
   return (
     <Controller
@@ -22,6 +26,8 @@ function InputField(props) {
       fullWidth // truyền vào TextField
       label={label}
       disabled={disabled}
+      error={!!hasError} //!! chuyển về true false
+      helperText={errors[name]?.message} // thêm ? ở đây nếu không chắc nó chứa message hay k //nếu ko thêm thì sẽ lỗi
     />
   );
 }
