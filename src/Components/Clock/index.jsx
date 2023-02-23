@@ -15,7 +15,7 @@ function Clock() {
         padding: "10px",
       }}
     >
-      Time: {timeString}
+      Time(custom Hook): {timeString}
     </p>
   );
 }

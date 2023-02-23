@@ -2,6 +2,7 @@ import { Grid } from "@mui/material";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
 import { NavLink, Redirect, Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 // import productApi from "./api/productApi";
 import "./App.scss";
 import BetterClock from "./Components/BetterClock";
@@ -15,12 +16,22 @@ import Pagination from "./Components/Pagination";
 import PostFiltersForm from "./Components/PostFiltersForm";
 import PostList from "./Components/PostList";
 import AlbumFeature from "./features/Album";
+import CounterFearture from "./features/CounterSlice";
 import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
 import logo from "./logo.svg";
 import ColorBoxHook from "./study/ColorBox";
 import CounterPrev from "./study/PrevValueRef";
 import TodoList from "./study/TodoList";
+
+//ex: Styled component //cho phép viết đc css in js
+const Title = styled.h1`
+  text-align: center;
+  font-weight: bold;
+  margin-top: 80px;
+
+  color: ${(props) => props.color || `green`};
+`;
 
 function App() {
   const name = "Tuan";
@@ -156,7 +167,10 @@ function App() {
           Hello World!
         </a>
         <>
-          Xin chao {student.name} - {age} - {isFemale ? "Male" : "Femle"}
+          <Title color="goldenrod">
+            Xin chao {student.name} - {age} - {isFemale ? "Male" : "Femle"}
+          </Title>
+
           {isFemale && (
             <>
               <p> {name} </p> <p> Male </p> <p> alt + shift + down buton </p>
@@ -229,6 +243,9 @@ function App() {
             <ColorBox />
           </fieldset>
           <CounterPrev />
+
+          <hr></hr>
+          <CounterFearture />
         </Route>
 
         <Route path="/albums" component={AlbumFeature} />

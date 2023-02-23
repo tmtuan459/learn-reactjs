@@ -1,6 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { TextField } from "@mui/material";
+import PropTypes from "prop-types";
 import { Controller } from "react-hook-form";
 
 InputField.propTypes = {
@@ -9,20 +8,21 @@ InputField.propTypes = {
 
   label: PropTypes.string,
   disabled: PropTypes.bool,
-  error: PropTypes.bool,
-  helperText: PropTypes.string,
 };
 
 function InputField(props) {
   const { form, name, label, disabled } = props;
   const { errors, formState } = form;
   const hasError = formState.touched[name] && errors[name];
+  console.log(errors[name], formState.touched[name]);
 
   return (
     <Controller
       name={name} // bắt buộc phải có
       control={form.control} // bắt buộc phải có
       as={TextField} //sử dụng Ui libary nào // nếu dùng onChange,.. thì xài render
+      margin="normal"
+      variant="outlined"
       fullWidth // truyền vào TextField
       label={label}
       disabled={disabled}

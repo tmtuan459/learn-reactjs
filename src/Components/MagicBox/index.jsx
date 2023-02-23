@@ -9,7 +9,7 @@ function MagicBox() {
   const color = useMagicColor();
   return (
     <>
-      <legend>Magic Box</legend>
+      <legend>Magic Box - Custom Hook</legend>
       {color ? (
         <div className="magic-box" style={{ backgroundColor: color }}></div>
       ) : (

@@ -100,3 +100,5 @@ src
     })}
 
 - install hook: npm install --save react-hook-form yup @hookform/resolvers @hookform/error-message
+- Tạo ra file jsconfig.json // file này được tạo ra để giảm thiểu thời gian import, coppy // https://code.visualstudio.com/docs/languages/jsconfig
+  ========================== HOOK =============================
