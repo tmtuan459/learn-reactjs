@@ -1,5 +1,6 @@
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { FormHelperText } from "@mui/material";
 import FormControl from "@mui/material/FormControl";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -49,8 +50,11 @@ function PasswordField(props) {
           }
           disabled={disabled}
           error={!!hasError} //!! chuyển về true false
-          helperText={errors[name]?.message} // thêm ? ở đây nếu không chắc nó chứa message hay k //nếu ko thêm thì sẽ lỗi
+          // helperText={errors[name]?.message} //OutlinedInput ko hoox troj  thêm ? ở đây nếu không chắc nó chứa message hay k //nếu ko thêm thì sẽ lỗi
         />
+        <FormHelperText error={!!hasError}>
+          {errors[name]?.message}
+        </FormHelperText>
       </FormControl>
     </div>
   );

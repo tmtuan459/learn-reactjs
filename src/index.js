@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./app/store";
+import { SnackbarProvider } from "notistack";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -13,7 +14,11 @@ root.render(
     <Provider store={store}>
       {/* Thành phần <Provider> làm cho cửa hàng Redux có sẵn cho bất kỳ thành phần lồng nhau nào cần truy cập vào cửa hàng Redux. */}
       <BrowserRouter>
-        <App />
+        <SnackbarProvider
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <App />
+        </SnackbarProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>

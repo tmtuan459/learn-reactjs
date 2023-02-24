@@ -15,13 +15,16 @@ function TodoForm(props) {
   //   title: yup.string().required("Please enter title"),
   //   // .min(5, "Title is too short"),
   // });
-  const schema = yup.object().shape({
-    title: yup.string().required("asdansd"),
-  });
+  const schema = yup
+    .object()
+    .shape({
+      title: yup.string().required("asdansd"),
+    })
+    .required();
 
   const form = useForm({
     defaultValues: {
-      title: " ", // cần liệt kê ở đây nếu không sẽ gặp tình trạng không biết nó là gì lõi: UnControl
+      title: "", // cần liệt kê ở đây nếu không sẽ gặp tình trạng không biết nó là gì lõi: UnControl
     },
     resolver: yupResolver(schema),
   });
@@ -30,7 +33,6 @@ function TodoForm(props) {
     const { onSubmit } = props;
     if (onSubmit) {
       onSubmit(values);
-      console.log("run submit");
     }
   };
 

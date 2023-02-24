@@ -1,5 +1,6 @@
 .container-wrap {
   padding-top: 32px;
+  position: relative;
 }
 
 .avatar {
@@ -12,4 +13,9 @@
 }
 .btn-submit {
   margin: 24 0 16 0;
+}
+
+.linear-progress {
+  position: absolute;
+  top: 16px;
 }
