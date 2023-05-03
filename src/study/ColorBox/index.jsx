@@ -3,7 +3,7 @@ import "./ColorBox.scss";
 import React, { useState } from "react";
 import { Tooltip } from "@mui/material";
 
-ColorBox.propTypes = {};
+ColorBoxHook.propTypes = {};
 
 function getRandomColor() {
   const COLOT_LIST = ["deeppink", "pink", "yellow", "orange", "black", "blue"];
@@ -12,7 +12,7 @@ function getRandomColor() {
   return COLOT_LIST[randomIndex];
 }
 
-function ColorBox() {
+function ColorBoxHook() {
   const [color, setColor] = useState(() => {
     const initColor = localStorage.getItem("box_color") || "deeppink";
     // console.log(initColor);
@@ -39,4 +39,4 @@ function ColorBox() {
   );
 }
 
-export default ColorBox;
+export default ColorBoxHook;

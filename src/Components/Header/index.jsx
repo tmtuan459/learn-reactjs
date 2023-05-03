@@ -1,19 +1,36 @@
+import { AccountCircle, Close } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
+import { IconButton, Menu, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import ProgressBar from "Components/ProgressBarScroll";
+import Login from "features/Auth/components/Login";
 import Register from "features/Auth/components/Register";
+import { logout } from "features/Auth/userSlice";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import "./styles.scss";
+
+const MODE = {
+  REGISTER: "register",
+  LOGIN: "login",
+};
 
 export default function Header() {
+  const loggedInUser = useSelector((state) => state.user.current);
+  const isLoggedIn = !!loggedInUser.id;
   const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState(MODE.LOGIN);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const dispatch = useDispatch();
+  const user = localStorage.getItem("user");
+  const userName = user ? JSON.parse(user).email.split("@gmail.com") : "";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -23,8 +40,20 @@ export default function Header() {
     setOpen(false);
   };
 
+  const handleUserClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleCloseMenu = () => {
+    setAnchorEl(null);
+  };
+  const handleLogoutClick = () => {
+    const action = logout();
+    dispatch(action);
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} className="header">
       <AppBar position="fixed" style={{ backgroundColor: "rgb(40,44,52)" }}>
         <Toolbar>
           <Link to="/" style={{ color: "white" }}>
@@ -36,24 +65,84 @@ export default function Header() {
               TT Shop
             </Link>
           </Typography>
-          <Button color="inherit" onClick={handleClickOpen}>
-            Register
-          </Button>
+          {!isLoggedIn && (
+            <Button color="inherit" onClick={handleClickOpen}>
+              {mode === MODE.LOGIN ? "Login" : "Register"}
+            </Button>
+          )}
+          {isLoggedIn && (
+            <IconButton color="inherit" onClick={handleUserClick}>
+              <div style={{ marginRight: "10px" }}>{userName}</div>
+
+              <AccountCircle />
+            </IconButton>
+          )}
         </Toolbar>
 
         <ProgressBar />
       </AppBar>
+      {isLoggedIn && (
+        <Menu
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleCloseMenu}
+          MenuListProps={{
+            "aria-labelledby": "basic-button",
+          }}
+          anchorOrigin={{
+            // search trên MUI config ưng ý và dán
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+          <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+        </Menu>
+      )}
 
       <Button variant="outlined" onClick={handleClickOpen}>
         Open form dialog
       </Button>
       <Dialog disableEscapeKeyDown={true} open={open}>
+        <IconButton className="close-btn" onClick={handleClose}>
+          <Close />
+        </IconButton>
         <DialogContent>
-          <Register />
+          {mode === MODE.LOGIN && (
+            <>
+              <Login closeDialog={handleClose} />
+
+              <Box textAlign="Center">
+                <Button
+                  onClick={() => {
+                    setMode(MODE.REGISTER);
+                  }}
+                >
+                  Don't have an account. Register Here
+                </Button>
+              </Box>
+            </>
+          )}
+          {mode === MODE.REGISTER && (
+            <>
+              <Register closeDialog={handleClose} />
+
+              <Box textAlign="Center">
+                <Button
+                  onClick={() => {
+                    setMode(MODE.LOGIN);
+                  }}
+                >
+                  Already have an account. Login Here
+                </Button>
+              </Box>
+            </>
+          )}
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-        </DialogActions>
       </Dialog>
     </Box>
   );

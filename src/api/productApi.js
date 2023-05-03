@@ -1,9 +1,36 @@
 import axiosClient from "./axiosClient";
 
 const productApi = {
-  getAll(params) {
-    const url = "/products";
-    return axiosClient.get(url, { params });
+  async getAll(params) {
+    // transform _page to _start
+    const newParams = { ...params };
+    newParams._start =
+      !params._page || params._page <= 1
+        ? 0
+        : (params._page - 1) * (params._limit || 50);
+
+    // remove  un-needed key
+    delete newParams._page;
+
+    // Fetch product list + count
+    // vì ở đây sử dụng strapi API ko hỗ trợ pagination nên cần get count ra để tính toán
+    const productList = await axiosClient.get("/products", {
+      params: newParams,
+    });
+
+    const count = await axiosClient.get("/products/count", {
+      params: newParams,
+    });
+
+    // build response and return
+    return {
+      data: productList,
+      pagination: {
+        page: params._page,
+        limit: params._limit,
+        total: count,
+      },
+    };
   },
 
   get(id) {

@@ -1,6 +1,7 @@
-:root {
+.header {
   flex-grow: 1;
-  color: white !important;
+  color: white;
+  text-align: center;
 }
 
 .menuButton {
@@ -8,4 +9,11 @@
 }
 .title {
   flex-grow: 1;
+}
+.close-btn {
+  position: absolute !important;
+  top: 8px;
+  right: 16px;
+  color: gray;
+  z-index: 1;
 }

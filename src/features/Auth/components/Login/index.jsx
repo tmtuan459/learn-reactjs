@@ -1,23 +1,19 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import { register } from "features/Auth/userSlice";
+import { login } from "features/Auth/userSlice";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
-import RegisterForm from "../RegisterForm";
-import PropTypes from "prop-types";
+import LoginForm from "../LoginForm";
 
-Register.propTypes = {
-  closeDialog: PropTypes.func,
-};
+Login.propTypes = {};
 
-function Register(props) {
+function Login(props) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleSubmit = async (values) => {
     try {
       // auto set username = email (chỉ là bài tập)
-      values.username = values.email;
-      const action = register(values);
+      const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction); //lấy kết quả ra
 
@@ -25,18 +21,17 @@ function Register(props) {
       if (closeDialog) {
         closeDialog();
       }
-
-      enqueueSnackbar("Register Successfully !!", { variant: "success" });
     } catch (error) {
+      console.log("Failed to login", error);
       enqueueSnackbar(error.message, { variant: "error" });
     }
   };
 
   return (
     <div>
-      <RegisterForm onSubmit={handleSubmit} />
+      <LoginForm onSubmit={handleSubmit} />
     </div>
   );
 }
 
-export default Register;
+export default Login;

@@ -1,13 +1,12 @@
 import { Grid } from "@mui/material";
-import { useSnackbar } from "notistack";
+import Study from "Components/Home";
+import ProductFeature from "features/Product";
+// import { useSnackbar } from "notistack";
 import queryString from "query-string";
 import { useEffect, useState } from "react";
-import { NavLink, Redirect, Route, Switch } from "react-router-dom";
-import styled from "styled-components";
-// import productApi from "./api/productApi";
+import { Redirect, Route, Switch } from "react-router-dom";
+import ColorBoxHook from "study/ColorBox";
 import "./App.scss";
-import BetterClock from "./Components/BetterClock";
-import Clock from "./Components/Clock";
 import ColorBox from "./Components/ColorBox";
 import Counter from "./Components/Counter";
 import Header from "./Components/Header";
@@ -20,29 +19,13 @@ import AlbumFeature from "./features/Album";
 import CounterFearture from "./features/CounterSlice";
 import ListCategoryFeature from "./features/ListCategory/pages";
 import TodoFeature from "./features/Todo/pages";
-import logo from "./logo.svg";
-import ColorBoxHook from "./study/ColorBox";
+
 import CounterPrev from "./study/PrevValueRef";
 import TodoList from "./study/TodoList";
 
-//ex: Styled component //cho phép viết đc css in js
-const Title = styled.h1`
-  text-align: center;
-  font-weight: bold;
-  margin-top: 80px;
-
-  color: ${(props) => props.color || `green`};
-`;
-
 function App() {
-  const name = "Tuan";
-  const age = 24;
-  const isFemale = true;
-  const student = {
-    name: "Tran Minh Tuan",
-  };
   const [isShowHook, setIsShowHook] = useState(true);
-  const listColor = ["red", "blue", "green", "yellow"];
+
   const [todoList, setTodoList] = useState([
     {
       id: 1,
@@ -94,16 +77,6 @@ function App() {
   //   console.log("TODO list effect");
   // });
 
-  // Start API
-  useEffect(() => {
-    const fetchProducts = async () => {
-      // const productList = await productApi.getAll();
-      // console.log(productList);
-    };
-    fetchProducts();
-  }, []);
-  // End API
-
   const [todoListTemp] = useState([...todoList]);
 
   const showHook = (props) => {
@@ -148,172 +121,106 @@ function App() {
     setTodoList(newTodolist);
   }
 
-  const [showClock, setShowClock] = useState(true);
-
   return (
     <div className="App">
       <Header className="App-nav-bar" />
 
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code> src / App.js </code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Hello World!
-        </a>
-        <>
-          <Title color="goldenrod">
-            Xin chao {student.name} - {age} - {isFemale ? "Male" : "Femle"}
-          </Title>
-
-          {isFemale && (
-            <>
-              <p> {name} </p> <p> Male </p> <p> alt + shift + down buton </p>
-              <p> Male </p>
-            </>
-          )}
-        </>
-        <ul>
-          {listColor.map((color) => (
-            <li key={color} style={{ color }}>
-              {color}
-            </li>
-          ))}
-        </ul>
-        <>
-          <Route path="/better-clock" component={BetterClock} />
-          {showClock && <Clock />}
-          <button
-            onClick={() => setShowClock(!showClock)}
-            style={{ marginBottom: "20px" }}
-          >
-            {showClock ? "Hide Clock" : "Show Clock"}
-          </button>
-        </>
-      </header>
-
-      {/* Menu */}
-      {/* Link thì tương tự NavLink nhưng không có class active */}
-      {/* NavLink dành cho dạng như menu active, khi click thì sẽ set class= acitve vào item */}
-      <ul className="menu-item">
-        <li>
-          <NavLink to="/todos"> Todos </NavLink>
-        </li>
-        <li>
-          <NavLink to="/albums"> Album Feature </NavLink>
-        </li>
-        <li>
-          <NavLink to="/counter-color"> Counter & Color Box </NavLink>
-        </li>
-        <li>
-          <NavLink to="/list-category"> List Category </NavLink>
-        </li>
-        <li>
-          <NavLink to="/color-todoList"> Color & Todo List </NavLink>
-        </li>
-        <li>
-          <NavLink to="/post-list-api"> Post List API </NavLink>
-        </li>
-      </ul>
-
       {/* Switch: tại 1 thời điểm chỉ render 1 component, nhứ vs bên dưới chỉ render ra đúng component todos */}
       {/* Redirect sử dụng trong Switch */}
-      <Switch>
-        <Redirect from="/" to="/todos" exact />
-        <Redirect from="/home" to="/"></Redirect>
-        {/* có thể truyền cả param:  */}
-        <Redirect from="/post-list/:postId" to="/posts/:postId"></Redirect>
+      <div style={{ marginTop: "50px" }}>
+        <Switch>
+          <Redirect from="/" to="/home" exact />
+          {/* có thể truyền cả param:  */}
+          <Redirect from="/post-list/:postId" to="/posts/:postId"></Redirect>
 
-        {/* =========================Route============================ */}
-        {/*mặc đinh exact = false, nếu có set exact thì nhập /todos/121231 vẫn load được component dưới*/}
-        <Route path="/todos" component={TodoFeature} />
+          {/* =========================Route============================ */}
+          {/*mặc đinh exact = false, nếu có set exact thì nhập /todos/121231 vẫn load được component dưới*/}
+          <Route path="/todos" component={TodoFeature} />
 
-        {/* Ở đây nếu sử dụng exact thì sẽ phải nhập đúng path mới render đc component, nên dùng exact cho component con */}
-        <Route path="/counter-color" exact>
-          <fieldset style={{ margin: "50px 0" }}>
-            <legend>
-              <i style={{ fontWeight: "bold" }}> Counter & Color Box </i>
-            </legend>
-            <Counter />
-            <ColorBox />
-          </fieldset>
-          <CounterPrev />
+          {/* Ở đây nếu sử dụng exact thì sẽ phải nhập đúng path mới render đc component, nên dùng exact cho component con */}
+          <Route path="/counter-color" exact>
+            <fieldset style={{ margin: "50px 0" }}>
+              <legend>
+                <i style={{ fontWeight: "bold" }}> Counter & Color Box </i>
+              </legend>
+              <Counter />
+              <ColorBox />
+            </fieldset>
+            <CounterPrev />
 
-          <hr></hr>
-          <CounterFearture />
-        </Route>
+            <hr></hr>
+            <CounterFearture />
+          </Route>
 
-        <Route path="/albums" component={AlbumFeature} />
+          <Route path="/albums" component={AlbumFeature} />
 
-        <Route path="/list-category" component={ListCategoryFeature} />
+          <Route path="/list-category" component={ListCategoryFeature} />
 
-        <Route path="/color-todoList">
-          <div style={{ marginBottom: "30px" }}>
-            <button
-              onClick={() => {
-                showHook(true);
-              }}
-            >
-              Show Color Box
-            </button>
-            <button
-              onClick={() => {
-                showHook(false);
-              }}
-            >
-              Show Todo List
-            </button>
-          </div>
-          <div>
-            {isShowHook && (
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <ColorBoxHook />
+          <Route path="/color-todoList">
+            <div style={{ marginBottom: "30px" }}>
+              <button
+                onClick={() => {
+                  showHook(true);
+                }}
+              >
+                Show Color Box
+              </button>
+              <button
+                onClick={() => {
+                  showHook(false);
+                }}
+              >
+                Show Todo List
+              </button>
+            </div>
+            <div>
+              {isShowHook && (
+                <Grid container spacing={2}>
+                  <Grid item xs={6}>
+                    <ColorBoxHook />
+                  </Grid>
+
+                  <Grid item xs={6}>
+                    <MagicBox />
+                  </Grid>
                 </Grid>
+              )}
+            </div>
+            <div>
+              {!isShowHook && (
+                <div>
+                  <TodoList
+                    todos={todoList}
+                    onTodoClick={handleTodoClick}
+                    resetOnClick={handleResetList}
+                    submitOnClick={handleSubmitForm}
+                  />
+                </div>
+              )}
+            </div>
+          </Route>
 
-                <Grid item xs={6}>
-                  <MagicBox />
-                </Grid>
-              </Grid>
-            )}
-          </div>
-          <div>
-            {!isShowHook && (
-              <div>
-                <TodoList
-                  todos={todoList}
-                  onTodoClick={handleTodoClick}
-                  resetOnClick={handleResetList}
-                  submitOnClick={handleSubmitForm}
-                />
-              </div>
-            )}
-          </div>
-        </Route>
+          <Route path="/post-list-api">
+            <div>
+              <PostFiltersForm
+                postList={postList}
+                onSubmit={handleFilterChange}
+              />
+              <PostList postList={postList} pagination={pagination} />
+              <Pagination
+                pagination={pagination}
+                onPageChange={handlePageChange}
+              />
+            </div>
+          </Route>
+          <Route path="/home" component={Study} />
 
-        <Route path="/post-list-api">
-          <div>
-            <PostFiltersForm
-              postList={postList}
-              onSubmit={handleFilterChange}
-            />
-            <PostList postList={postList} pagination={pagination} />
-            <Pagination
-              pagination={pagination}
-              onPageChange={handlePageChange}
-            />
-          </div>
-        </Route>
+          <Route path="/products" component={ProductFeature}></Route>
 
-        {/* ở đây có nghĩa khi không có ông nào match với thì sẽ trả về thằng dưới cùng này theo cơ chế của switch */}
-        <Route component={NotFound} />
-      </Switch>
+          {/* ở đây có nghĩa khi không có ông nào match với thì sẽ trả về thằng dưới cùng này theo cơ chế của switch */}
+          <Route component={NotFound} />
+        </Switch>
+      </div>
 
       <footer
         style={{ marginBottom: "50px", backgroundColor: "#282c34" }}

@@ -8,34 +8,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import "./styles.scss";
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-function RegisterForm(props) {
+function LoginForm(props) {
   const schema = yup.object().shape({
-    fullName: yup.string().required("Please enter your name"),
-    email: yup
+    identifier: yup
       .string()
       .required("Please enter your email")
       .email("Please enter a valid email"),
-    password: yup
-      .string()
-      .required("Please enter your password")
-      .min(6, "Please enter at least 6 characters"),
-    retypePassword: yup
-      .string()
-      .required("Please enter your password")
-      .min(6, "Please enter at least 6 characters"),
+    password: yup.string().required("Please enter your password"),
   });
 
   const form = useForm({
     defaultValues: {
-      // cần có để handle lỗi Uncontro
-      fullName: "",
-      email: "",
+      // cần có để handle lỗi Uncontrol
+      identifier: "",
       password: "",
-      retypePassword: "",
     },
     resolver: yupResolver(schema),
   });
@@ -54,18 +44,12 @@ function RegisterForm(props) {
       {isSubmitting && <LinearProgress className="linear-progress" />}
       <Avatar className="avatar">{/* <LockOutlined></LockOutlined> */}</Avatar>
       <Typography className="title" component="h3">
-        Create an account
+        Sign In
       </Typography>
       <form onSubmit={form.handleSubmit(handleFormSubmit)}>
         {/* name owr ddaay phai dung */}
-        <InputField name="fullName" label="Full Name" form={form} />
-        <InputField name="email" label="Email" form={form} />
+        <InputField name="identifier" label="Email" form={form} />
         <PasswordField name="password" label="Password" form={form} />
-        <PasswordField
-          name="retypePassword"
-          label="Retype Password"
-          form={form}
-        />
 
         <Button
           type="submit"
@@ -75,11 +59,11 @@ function RegisterForm(props) {
           fullWidth
           disabled={isSubmitting}
         >
-          Create an account
+          Sign In
         </Button>
       </form>
     </div>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;
