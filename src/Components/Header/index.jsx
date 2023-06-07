@@ -27,7 +27,7 @@ const MODE = {
 
 export default function Header() {
   const dispatch = useDispatch();
-  const loggedInUser = useSelector((state1) => state1.user.current);
+  const loggedInUser = useSelector((state) => state.user.current);
   const cartItemCount = useSelector(cartItemsCountSelector); // lấy data từ selector
   const isLoggedIn = !!loggedInUser.id;
   const [open, setOpen] = useState(false);
@@ -71,7 +71,10 @@ export default function Header() {
           </Link>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            <Link to="/" style={{ color: "white", textDecoration: "unset" }}>
+            <Link
+              to="/products"
+              style={{ color: "white", textDecoration: "unset" }}
+            >
               TT Shop
             </Link>
           </Typography>

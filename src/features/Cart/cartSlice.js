@@ -1,7 +1,7 @@
 const { createSlice } = require("@reduxjs/toolkit");
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: "cart", // đặt cho đúng với cả reducer và rootReducer
   initialState: {
     showMiniCart: false,
     cartList: [],
@@ -48,4 +48,7 @@ export const {
   setQuantity,
   removeFromCart,
 } = actions;
+
+// export const getCartList = (state) => state.cart.showMiniCart;
+
 export default reducer;
