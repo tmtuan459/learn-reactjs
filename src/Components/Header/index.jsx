@@ -1,6 +1,6 @@
 import { AccountCircle, Close } from "@mui/icons-material";
 import HomeIcon from "@mui/icons-material/Home";
-import { IconButton, Menu, MenuItem } from "@mui/material";
+import { Badge, IconButton, Menu, MenuItem } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,6 +16,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./styles.scss";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { cartItemsCountSelector } from "features/Cart/selectors";
+import { useHistory } from "react-router-dom";
 
 const MODE = {
   REGISTER: "register",
@@ -23,12 +26,15 @@ const MODE = {
 };
 
 export default function Header() {
-  const loggedInUser = useSelector((state) => state.user.current);
+  const dispatch = useDispatch();
+  const loggedInUser = useSelector((state1) => state1.user.current);
+  const cartItemCount = useSelector(cartItemsCountSelector); // lấy data từ selector
   const isLoggedIn = !!loggedInUser.id;
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState(MODE.LOGIN);
   const [anchorEl, setAnchorEl] = useState(null);
-  const dispatch = useDispatch();
+  const history = useHistory();
+
   const user = localStorage.getItem("user");
   const userName = user ? JSON.parse(user).email.split("@gmail.com") : "";
 
@@ -52,6 +58,10 @@ export default function Header() {
     dispatch(action);
   };
 
+  const handleCartOnClick = () => {
+    history.push(`/cart`);
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }} className="header">
       <AppBar position="fixed" style={{ backgroundColor: "rgb(40,44,52)" }}>
@@ -65,6 +75,7 @@ export default function Header() {
               TT Shop
             </Link>
           </Typography>
+
           {!isLoggedIn && (
             <Button color="inherit" onClick={handleClickOpen}>
               {mode === MODE.LOGIN ? "Login" : "Register"}
@@ -77,6 +88,17 @@ export default function Header() {
               <AccountCircle />
             </IconButton>
           )}
+
+          <IconButton
+            size="large"
+            aria-label="show new notifications"
+            color="inherit"
+            onClick={handleCartOnClick}
+          >
+            <Badge badgeContent={cartItemCount} color="error">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
         </Toolbar>
 
         <ProgressBar />

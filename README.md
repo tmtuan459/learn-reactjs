@@ -102,3 +102,7 @@ src
 - install hook: npm install --save react-hook-form yup @hookform/resolvers @hookform/error-message
 - Tạo ra file jsconfig.json // file này được tạo ra để giảm thiểu thời gian import, coppy // https://code.visualstudio.com/docs/languages/jsconfig
   ========================== HOOK =============================
+
+  - khi update version check phiên bản trong github rồi dò lần lượt từng phiên bản từ phiên bản hiện tại đến phiên bản muốn update xem có breaking change không
+
+  - Khi làm việc với object hoặc array thì phải clone ra cái mới, vì nó dạng tham chiếu nếu ko clone ra cái mới thì nó hiểu ko thay đổi gì cả

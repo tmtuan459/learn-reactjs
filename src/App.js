@@ -22,6 +22,7 @@ import TodoFeature from "./features/Todo/pages";
 
 import CounterPrev from "./study/PrevValueRef";
 import TodoList from "./study/TodoList";
+import CartFeature from "features/Cart";
 
 function App() {
   const [isShowHook, setIsShowHook] = useState(true);
@@ -216,6 +217,8 @@ function App() {
           <Route path="/home" component={Study} />
 
           <Route path="/products" component={ProductFeature}></Route>
+
+          <Route path="/cart" component={CartFeature}></Route>
 
           {/* ở đây có nghĩa khi không có ông nào match với thì sẽ trả về thằng dưới cùng này theo cơ chế của switch */}
           <Route component={NotFound} />

@@ -41,6 +41,7 @@ const userSlice = createSlice({
     },
   },
   extraReducers: {
+    //xử lý
     [register.fulfilled]: (state, action) => {
       state.current = action.payload; // action.payload; = data.user
     },

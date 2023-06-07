@@ -49,7 +49,7 @@ function FilterByService({ filters = {}, onChange }) {
               label={service.label}
               control={
                 <Checkbox
-                  checked={filters[service.value]} // ở dây có nghĩa nó sẽ lấy filters.isPromotion và .isFreeship
+                  checked={Boolean(filters[service.value])} // ở dây có nghĩa nó sẽ lấy filters.isPromotion và .isFreeship
                   // ban đầu chưa có nên bị lỗi undefined nên cần convert về boolean
                   onChange={handlechange}
                   name={service.value}
