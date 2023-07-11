@@ -9,7 +9,7 @@ export default function useProductDetail(productId) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    //IIFE là viết tắt của Immediately Invoked Function Expression, có nghĩa là khởi tạo một function và thực thi nó ngay lập tức.
+    // (() => {})() : IIFE là viết tắt của Immediately Invoked Function Expression, có nghĩa là khởi tạo một function và thực thi nó ngay lập tức.
     (async () => {
       try {
         setLoading(true);

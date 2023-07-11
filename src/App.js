@@ -23,6 +23,7 @@ import TodoFeature from "./features/Todo/pages";
 import CounterPrev from "./study/PrevValueRef";
 import TodoList from "./study/TodoList";
 import CartFeature from "features/Cart";
+import FormikSingUp from "features/Auth/components/Formik-SingupForm";
 
 function App() {
   const [isShowHook, setIsShowHook] = useState(true);
@@ -214,6 +215,9 @@ function App() {
               />
             </div>
           </Route>
+
+          <Route path="/register2-formik" component={FormikSingUp} />
+
           <Route path="/home" component={Study} />
 
           <Route path="/products" component={ProductFeature}></Route>

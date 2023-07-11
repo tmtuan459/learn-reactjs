@@ -8,7 +8,7 @@ import { THUMBNAIL_PLACEHOLDER } from "constants";
 CartFeature.propTypes = {};
 
 function CartFeature() {
-  const totalPrice = useSelector(cartTotalSelector);
+  const totalPrice = useSelector(cartTotalSelector); //  sử dụng React Redux để truy cập vào state trong Redux store và lấy dữ liệu từ cartList
   const cartList = useSelector((state) => state.cart.cartList); //  sử dụng React Redux để truy cập vào state trong Redux store và lấy dữ liệu từ cartList
 
   return (

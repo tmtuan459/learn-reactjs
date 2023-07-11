@@ -106,3 +106,26 @@ src
   - khi update version check phiên bản trong github rồi dò lần lượt từng phiên bản từ phiên bản hiện tại đến phiên bản muốn update xem có breaking change không
 
   - Khi làm việc với object hoặc array thì phải clone ra cái mới, vì nó dạng tham chiếu nếu ko clone ra cái mới thì nó hiểu ko thay đổi gì cả
+    ===================================================================================================================================================== useRef, Tạo ra 1 state và khi cập nhật nó ko re-render componenet chú ý: thằng này trigger function ở thằng con khi ở thằng cha useEffect: chạy sau phần render return useSelector useQuery, useMemo, check kiểm tra nó có thay đổi hay ko mới re-render useState: re-render component: chủ yếu là state: 1. state chính nó, 2. props, 3. state ở store và state đó change hàm setState là asyn func, dù cón log ra thì nó vẫn là giá trị cũ - trường hợp update state 2 lần trong 1 func thì cần code khác - updating state based on the prev state const a =1 ex: const updateFunction = () => { setAge(a + 1); setAge(a + 1); } => ở đây vẫn trả về là 2, ko phải 3 như mong đợi
+
+=> có thể xài cách này để solve this problem : setAge(a => a +1) : truyền vào 1 function callback
+Lưu ý khi update 1 obj, array thì cần clone ra 1 obj mới, tạo ra tham chiếu mới rồi gọi hàm setState thì mới trigger re-render
+
+Đối với xử lý tham chiếu nên xài useImmer (ImmerJS)
+
+Những biến bình thường sẽ không persict, sẽ reset khi re-render (ex: let a =1)
+
+StrictMode chạy 2 lần, nhưng chỉ ở dưới dev, để nó check có phải pure function hay không, nếu là impure thì cần fix
+
+xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt 1+ 2 + '3' = '33' || '42' - 2 = 40. vì quy tắc chuyển đổi kiểu dữ liệu tự động trong JavaScript, được gọi là nguyên tắc "implicit type coercion".
+
+Tham trị và tham chiếu trong JS: Cách 1 biến trong js đc lưu ntn: lưu dạng tham trị hay tham chiếu
+
+Tham trị: lưu dạng giá trị vd:( number, string, boolean, null, underfined) lưu trực tiếp giá trị xuống vùng nhớ
+Tham chiếu: lưu dạng tham chiếu vd(objact, array) lưu địa chỉ nơi giữa giá trị vd: const a= {name: TMT} thực chất a = 1E2F 1E2F là địa chỉ của kho chứa, chứa giá trị obj
+nhớ clone ra obj mới khi thay đổi props state reactJS/ Redux
+Khác nhau giữa get và post, có thể xài post để get data đc ko,
+
+Có thể edit state của redux trực tiếp được không?
+
+lỗi thường gặp cảu redux - khó khăn
