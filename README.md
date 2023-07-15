@@ -121,7 +121,7 @@ Những biến bình thường sẽ không persict, sẽ reset khi re-render (ex
 
 **StrictMode** chạy 2 lần, nhưng chỉ ở dưới dev, để nó check có phải pure function hay không, nếu là impure thì cần fix
 
-**Bundling:** Nếu sử dung CRA để tạo app thì nó sử dụng thằng webpack để làm quá trình bundle, khi deploy thì nó sẽ gom hết code react để tạo ra file dist(distribution) và trong đó sẽ chỉ có 1 file js đã được bundle. 
+**Bundling:** Nếu sử dung CRA để tạo app thì nó sử dụng thằng webpack để làm quá trình bundle, khi deploy thì nó sẽ gom hết code react để tạo ra file dist(distribution) và trong đó sẽ chỉ có 1 file js đã được bundle. Nếu có quá nhiều component phức tạp nên sử dụng kỹ thuật Code spliting( React Lazy - Chỉ hiểu quả đối với môi trường production)
 
 xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt 1+ 2 + '3' = '33' || '42' - 2 = 40. vì quy tắc chuyển đổi kiểu dữ liệu tự động trong JavaScript, được gọi là nguyên tắc "implicit type coercion".
 
