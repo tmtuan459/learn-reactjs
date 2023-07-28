@@ -166,5 +166,16 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
   
 **Cơ chế đồng bộ, bất đồng bộ trong JS**
   Đồng bộ (sync) - bất đồng bộ (async) - EVENT LOOP trong JavaScript: coi ytb: https://www.youtube.com/watch?v=jfQUw8QxaZc&ab_channel=Firelop
-
   
+**Context trong reactJS**
+  - Là khai niệm đơn giản hóa việc truyền dữ liệu từ component cha xuống component con không sử dụng props ( như provider của redux)
+  - ex: Component A => Component B => Component C : Dùng context có thể truyền thằng từ A => C
+  - Code: Component A {
+    		+ sử dụng CreateContext để tạo ra, có thể có nhiều context ex: const ContextA = createContext();
+    		+ bọc code thằng cha bằng context ex: <ContextA.Provider value ={AnyValueToPass}>
+								code component cha	
+    							</ContextA.Provider>     }
+	Component C {
+		+ Sử dụng hook: useContext, để nhận data truyền xuống
+  		+ code: const value = useContext(ContextA) // ContextA import từ component cha
+  ytb: https://www.youtube.com/watch?v=TENin-HxvRg	
