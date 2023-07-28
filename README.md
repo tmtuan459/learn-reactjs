@@ -130,6 +130,7 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
     **Tham trị**: lưu dạng giá trị vd:( number, string, boolean, null, underfined) lưu trực tiếp giá trị xuống vùng nhớ
     **Tham chiếu**: lưu dạng tham chiếu vd(objact, array) lưu địa chỉ nơi giữa giá trị vd: const a= {name: TMT} thực chất a = 1E2F 1E2F là địa chỉ của kho chứa,     chứa giá trị obj
       ! nhớ clone ra obj mới khi thay đổi props state reactJS/ Redux
+      
 **Khác nhau giữa get và post, có thể xài post để get data đc ko,**
     Khi bạn sử dụng POST để lấy dữ liệu, bạn cần phải viết mã xử lý trên máy chủ để xử lý yêu cầu POST và trả về dữ liệu yêu cầu.
     Sử dụng phương thức POST để lấy dữ liệu có thể gây rối cho các nhà phát triển khác, vì họ thường kỳ vọng rằng POST sẽ gửi dữ liệu lên máy chủ và không trả về         dữ liệu từ máy chủ.
@@ -137,8 +138,10 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
 
 **Có thể edit state của redux trực tiếp được không?** 
     Không, State redux là ReadOnly chỉ có sử dụng dispatch để update
+    
 **lỗi thường gặp cảu redux, nguyên lý của redux** 
   - Xem trong file pdf
+  - 
 **Life Cycle** trong React hoạt động như thế nào ? Hãy chỉ ra flow của một life cycle?
     **componentWillMount** đây là method sẽ được thực thi trước khi 1 component được render trên cả server side và client side.    
     **componentDidMount** method này được thực thi khi 1 component được render trên client side. Đây là nơi các hàm AJAX requests, DOM or update state được thực        thi. Method này cũng đucợ sử dụng để kết nối với các JS Framework khác và các function với delayed execution như setTimeout or setInterval.    
@@ -147,17 +150,20 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
     **componentWillUpdate** được gọi khi chúng ta update state của component trước khi nó render lại.    
     **componentDidUpdate** sau khi componentWillUpdate ở trên được gọi xong thì đến lượt thằng này được goi.    
     **componentWillUnmount** được gọi khi chúng ta unmout 1 component kiểu như xóa nó khỏi react.
+    
 **JavaScript closures là gì?**
   JavaScript Closures là tập hợp bao gồm một hàm và môi trường nơi hàm số đó được khai 	báo. Ở đây, môi trường bao gồm tất cả những biến cục bộ trong phạm vi hàm   số được khai báo. (Để đơn giản, từ nay mình sẽ sử dụng hàm closures khi nói về JavaScript closures).
 	Hàm closures có thể truy cập biến số ở 3 phạm vi khác nhau là:
 		Biến toàn cục (global)
 		Biến được khai báo ở hàm số chứa hàm closures (outer function)
 		Biến ở trên trong hàm closures
+
 **Var, Let, Const trong JS**
   Khai báo var được định phạm vi toàn cục (global) hay hàm (function) trong khi let và const được định phạm vi là khối mã (block)
   Biến var có thể được cập nhật và khai báo lại trong phạm vi tồn tại; biến let có thể được cập nhật nhưng không thể khai báo lại; biến const không thể cập nhật       nhưng không thể khai báo lại.
   Khai báo của var, let, const đều được dịch chuyển lên đầu của phạm vi. Nhưng trong khi biến var được khởi gán giá trị với undefined, biến let và const không       được khởi gán giá trị.
   Trong khi var và let có thể được khai báo không khởi gán giá trị, const phải khởi gán giá trị khi khai báo.
+  
 **Cơ chế đồng bộ, bất đồng bộ trong JS**
   Đồng bộ (sync) - bất đồng bộ (async) - EVENT LOOP trong JavaScript: coi ytb: https://www.youtube.com/watch?v=jfQUw8QxaZc&ab_channel=Firelop
 
