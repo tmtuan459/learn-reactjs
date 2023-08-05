@@ -1,4 +1,4 @@
-# Getting Started with Create React App - chanhged
+# Getting Started with Create React App - chanhged -dev
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -106,11 +106,11 @@ src
   - khi update version check phiên bản trong github rồi dò lần lượt từng phiên bản từ phiên bản hiện tại đến phiên bản muốn update xem có breaking change không
 
   - Khi làm việc với object hoặc array thì phải clone ra cái mới, vì nó dạng tham chiếu nếu ko clone ra cái mới thì nó hiểu ko thay đổi gì cả
-    ===================================================================================================================================================== useRef, Tạo ra 1 state và khi cập nhật nó ko re-render componenet chú ý: thằng này trigger function ở thằng con khi ở thằng cha useEffect: chạy sau phần render return   
-   useSelector useQuery, useMemo, check kiểm tra nó có thay đổi hay ko mới re-render useState: re-render component: chủ yếu là state: 1. state chính nó, 2.     
-   props, 3. state ở store và state đó change hàm setState là asyn func, dù cón log ra thì nó vẫn là giá trị cũ - trường hợp update state 2 lần trong 1 func thì 
-   cần code khác - updating state based on the prev state const a =1 ex: const updateFunction = () => { setAge(a + 1); setAge(a + 1); } => ở đây vẫn trả về là 2, 
-   ko phải 3 như mong đợi
+    ===================================================================================================================================================== useRef, Tạo ra 1 state và khi cập nhật nó ko re-render componenet chú ý: thằng này trigger function ở thằng con khi ở thằng cha useEffect: chạy sau phần render return  
+    useSelector useQuery, useMemo, check kiểm tra nó có thay đổi hay ko mới re-render useState: re-render component: chủ yếu là state: 1. state chính nó, 2.  
+    props, 3. state ở store và state đó change hàm setState là asyn func, dù cón log ra thì nó vẫn là giá trị cũ - trường hợp update state 2 lần trong 1 func thì
+    cần code khác - updating state based on the prev state const a =1 ex: const updateFunction = () => { setAge(a + 1); setAge(a + 1); } => ở đây vẫn trả về là 2,
+    ko phải 3 như mong đợi
 
 => có thể xài cách này để solve this problem : setAge(a => a +1) : truyền vào 1 function callback
 Lưu ý khi update 1 obj, array thì cần clone ra 1 obj mới, tạo ra tham chiếu mới rồi gọi hàm setState thì mới trigger re-render
@@ -125,57 +125,54 @@ Những biến bình thường sẽ không persict, sẽ reset khi re-render (ex
 
 xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt 1+ 2 + '3' = '33' || '42' - 2 = 40. vì quy tắc chuyển đổi kiểu dữ liệu tự động trong JavaScript, được gọi là nguyên tắc "implicit type coercion".
 
-**Tham trị và tham chiếu trong JS**: 
-  Cách thức 1 biến trong js đc lưu ntn: lưu dạng tham trị hay tham chiếu
-    **Tham trị**: lưu dạng giá trị vd:( number, string, boolean, null, underfined) lưu trực tiếp giá trị xuống vùng nhớ
-    **Tham chiếu**: lưu dạng tham chiếu vd(objact, array) lưu địa chỉ nơi giữa giá trị vd: const a= {name: TMT} thực chất a = 1E2F 1E2F là địa chỉ của kho chứa,     chứa giá trị obj
-      ! nhớ clone ra obj mới khi thay đổi props state reactJS/ Redux
-      
-**Khác nhau giữa get và post, có thể xài post để get data đc ko,**
-    Khi bạn sử dụng POST để lấy dữ liệu, bạn cần phải viết mã xử lý trên máy chủ để xử lý yêu cầu POST và trả về dữ liệu yêu cầu.
-    Sử dụng phương thức POST để lấy dữ liệu có thể gây rối cho các nhà phát triển khác, vì họ thường kỳ vọng rằng POST sẽ gửi dữ liệu lên máy chủ và không trả về         dữ liệu từ máy chủ.
-    Nhìn chung, để lấy dữ liệu từ máy chủ, bạn nên sử dụng phương thức GET. Để gửi dữ liệu lên máy chủ, hãy sử dụng phương thức POST.
+**Tham trị và tham chiếu trong JS**:
+Cách thức 1 biến trong js đc lưu ntn: lưu dạng tham trị hay tham chiếu
+**Tham trị**: lưu dạng giá trị vd:( number, string, boolean, null, underfined) lưu trực tiếp giá trị xuống vùng nhớ
+**Tham chiếu**: lưu dạng tham chiếu vd(objact, array) lưu địa chỉ nơi giữa giá trị vd: const a= {name: TMT} thực chất a = 1E2F 1E2F là địa chỉ của kho chứa, chứa giá trị obj
+! nhớ clone ra obj mới khi thay đổi props state reactJS/ Redux
 
-**Có thể edit state của redux trực tiếp được không?** 
-    Không, State redux là ReadOnly chỉ có sử dụng dispatch để update
-    
-**lỗi thường gặp cảu redux, nguyên lý của redux** 
-  - Xem trong file pdf
-  - 
-**Life Cycle** trong React hoạt động như thế nào ? Hãy chỉ ra flow của một life cycle?
-    **componentWillMount** đây là method sẽ được thực thi trước khi 1 component được render trên cả server side và client side.    
-    **componentDidMount** method này được thực thi khi 1 component được render trên client side. Đây là nơi các hàm AJAX requests, DOM or update state được thực        thi. Method này cũng đucợ sử dụng để kết nối với các JS Framework khác và các function với delayed execution như setTimeout or setInterval.    
-    **componentWillReceiveProps** sẽ được thực thi ngay khi thuộc tính props (tìm hiểu props là gì?) được update và trước khi component được render lại. Trong ví       dụ dưới, ta sẽ sử dung method này vùng với setNewNumber để update state.   
-    **shouldComponentUpdate** sẽ trả về kết quả true or false. Phương thức này sẽ xác định 1 component có được update hay không. Mặc định giá trị này là true.       Nếu bạn không muốn component render lại sau khi update state hay props thì return giá trị thành false. Các bạn xem ví dụ dưới để hiểu rõ.  
-    **componentWillUpdate** được gọi khi chúng ta update state của component trước khi nó render lại.    
-    **componentDidUpdate** sau khi componentWillUpdate ở trên được gọi xong thì đến lượt thằng này được goi.    
-    **componentWillUnmount** được gọi khi chúng ta unmout 1 component kiểu như xóa nó khỏi react.
-    
+**Khác nhau giữa get và post, có thể xài post để get data đc ko,**
+Khi bạn sử dụng POST để lấy dữ liệu, bạn cần phải viết mã xử lý trên máy chủ để xử lý yêu cầu POST và trả về dữ liệu yêu cầu.
+Sử dụng phương thức POST để lấy dữ liệu có thể gây rối cho các nhà phát triển khác, vì họ thường kỳ vọng rằng POST sẽ gửi dữ liệu lên máy chủ và không trả về dữ liệu từ máy chủ.
+Nhìn chung, để lấy dữ liệu từ máy chủ, bạn nên sử dụng phương thức GET. Để gửi dữ liệu lên máy chủ, hãy sử dụng phương thức POST.
+
+**Có thể edit state của redux trực tiếp được không?**
+Không, State redux là ReadOnly chỉ có sử dụng dispatch để update
+
+**lỗi thường gặp cảu redux, nguyên lý của redux**
+
+- Xem trong file pdf
+- **Life Cycle** trong React hoạt động như thế nào ? Hãy chỉ ra flow của một life cycle?
+  **componentWillMount** đây là method sẽ được thực thi trước khi 1 component được render trên cả server side và client side.  
+   **componentDidMount** method này được thực thi khi 1 component được render trên client side. Đây là nơi các hàm AJAX requests, DOM or update state được thực thi. Method này cũng đucợ sử dụng để kết nối với các JS Framework khác và các function với delayed execution như setTimeout or setInterval.  
+   **componentWillReceiveProps** sẽ được thực thi ngay khi thuộc tính props (tìm hiểu props là gì?) được update và trước khi component được render lại. Trong ví dụ dưới, ta sẽ sử dung method này vùng với setNewNumber để update state.  
+   **shouldComponentUpdate** sẽ trả về kết quả true or false. Phương thức này sẽ xác định 1 component có được update hay không. Mặc định giá trị này là true. Nếu bạn không muốn component render lại sau khi update state hay props thì return giá trị thành false. Các bạn xem ví dụ dưới để hiểu rõ.  
+   **componentWillUpdate** được gọi khi chúng ta update state của component trước khi nó render lại.  
+   **componentDidUpdate** sau khi componentWillUpdate ở trên được gọi xong thì đến lượt thằng này được goi.  
+   **componentWillUnmount** được gọi khi chúng ta unmout 1 component kiểu như xóa nó khỏi react.
+
 **JavaScript closures là gì?**
-  JavaScript Closures là tập hợp bao gồm một hàm và môi trường nơi hàm số đó được khai 	báo. Ở đây, môi trường bao gồm tất cả những biến cục bộ trong phạm vi hàm   số được khai báo. (Để đơn giản, từ nay mình sẽ sử dụng hàm closures khi nói về JavaScript closures).
-	Hàm closures có thể truy cập biến số ở 3 phạm vi khác nhau là:
-		Biến toàn cục (global)
-		Biến được khai báo ở hàm số chứa hàm closures (outer function)
-		Biến ở trên trong hàm closures
+JavaScript Closures là tập hợp bao gồm một hàm và môi trường nơi hàm số đó được khai báo. Ở đây, môi trường bao gồm tất cả những biến cục bộ trong phạm vi hàm số được khai báo. (Để đơn giản, từ nay mình sẽ sử dụng hàm closures khi nói về JavaScript closures).
+Hàm closures có thể truy cập biến số ở 3 phạm vi khác nhau là:
+Biến toàn cục (global)
+Biến được khai báo ở hàm số chứa hàm closures (outer function)
+Biến ở trên trong hàm closures
 
 **Var, Let, Const trong JS**
-  Khai báo var được định phạm vi toàn cục (global) hay hàm (function) trong khi let và const được định phạm vi là khối mã (block)
-  Biến var có thể được cập nhật và khai báo lại trong phạm vi tồn tại; biến let có thể được cập nhật nhưng không thể khai báo lại; biến const không thể cập nhật       nhưng không thể khai báo lại.
-  Khai báo của var, let, const đều được dịch chuyển lên đầu của phạm vi. Nhưng trong khi biến var được khởi gán giá trị với undefined, biến let và const không       được khởi gán giá trị.
-  Trong khi var và let có thể được khai báo không khởi gán giá trị, const phải khởi gán giá trị khi khai báo.
-  
+Khai báo var được định phạm vi toàn cục (global) hay hàm (function) trong khi let và const được định phạm vi là khối mã (block)
+Biến var có thể được cập nhật và khai báo lại trong phạm vi tồn tại; biến let có thể được cập nhật nhưng không thể khai báo lại; biến const không thể cập nhật nhưng không thể khai báo lại.
+Khai báo của var, let, const đều được dịch chuyển lên đầu của phạm vi. Nhưng trong khi biến var được khởi gán giá trị với undefined, biến let và const không được khởi gán giá trị.
+Trong khi var và let có thể được khai báo không khởi gán giá trị, const phải khởi gán giá trị khi khai báo.
+
 **Cơ chế đồng bộ, bất đồng bộ trong JS**
-  Đồng bộ (sync) - bất đồng bộ (async) - EVENT LOOP trong JavaScript: coi ytb: https://www.youtube.com/watch?v=jfQUw8QxaZc&ab_channel=Firelop
-  
+Đồng bộ (sync) - bất đồng bộ (async) - EVENT LOOP trong JavaScript: coi ytb: https://www.youtube.com/watch?v=jfQUw8QxaZc&ab_channel=Firelop
+
 **Context trong reactJS**
-  - Là khai niệm đơn giản hóa việc truyền dữ liệu từ component cha xuống component con không sử dụng props ( như provider của redux)
-  - ex: Component A => Component B => Component C : Dùng context có thể truyền thằng từ A => C
-  - Code: Component A {
-    		+ sử dụng CreateContext để tạo ra, có thể có nhiều context ex: const ContextA = createContext();
-    		+ bọc code thằng cha bằng context ex: <ContextA.Provider value ={AnyValueToPass}>
-								code component cha	
-    							</ContextA.Provider>     }
-	Component C {
-		+ Sử dụng hook: useContext, để nhận data truyền xuống
-  		+ code: const value = useContext(ContextA) // ContextA import từ component cha
-  ytb: https://www.youtube.com/watch?v=TENin-HxvRg	
+
+- Là khai niệm đơn giản hóa việc truyền dữ liệu từ component cha xuống component con không sử dụng props ( như provider của redux)
+- ex: Component A => Component B => Component C : Dùng context có thể truyền thằng từ A => C
+- Code: Component A { + sử dụng CreateContext để tạo ra, có thể có nhiều context ex: const ContextA = createContext(); + bọc code thằng cha bằng context ex: <ContextA.Provider value ={AnyValueToPass}>
+  code component cha
+  </ContextA.Provider> }
+  Component C { + Sử dụng hook: useContext, để nhận data truyền xuống + code: const value = useContext(ContextA) // ContextA import từ component cha
+  ytb: https://www.youtube.com/watch?v=TENin-HxvRg
