@@ -182,3 +182,15 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
 ** Props: default nó sẽ là true
 	ex: <ComponentA isView data={dataInput} />
 		isView ở đây sẽ có giá trị là true, thường thì sẽ viết như thế chứ ko viết isView={true}
+	Spread/Rest Props:
+		function Input({label, ...inputProps}) {
+			<>
+				<label>{label}</label>
+				<input {...inputProps} /> // có thể xài cách này để gọn code
+			</>
+		}
+
+  		function App() {
+			<Input
+				label="Full name" type="text" title="Day la input" placeholder="Enter Name" onFocus={()={console.log(Math.random())}}
+			/>
