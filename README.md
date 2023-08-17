@@ -178,4 +178,7 @@ xử lý dữ liệu: 0.1 + 0.2 = 0.300000000004 phải cần sử dụng BigInt
 	Component C {
 		+ Sử dụng hook: useContext, để nhận data truyền xuống
   		+ code: const value = useContext(ContextA) // ContextA import từ component cha
-  ytb: https://www.youtube.com/watch?v=TENin-HxvRg	
+  ytb: https://www.youtube.com/watch?v=TENin-HxvRg
+** Props: default nó sẽ là true
+	ex: <ComponentA isView data={dataInput} />
+		isView ở đây sẽ có giá trị là true, thường thì sẽ viết như thế chứ ko viết isView={true}
